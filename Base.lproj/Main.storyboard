@@ -44,7 +44,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Compositions" id="vHW-io-6pw">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="2Xh-Rv-Kfg"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="2Xh-Rv-Kfg">
+                            <connections>
+                                <segue destination="CBZ-YN-fFF" kind="presentation" identifier="addComposition" id="jp4-dV-bq7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCl-fE-dxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,6 +147,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46n-FI-R4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928" y="610"/>
+        </scene>
+        <!--Cell View Controller-->
+        <scene sceneID="V8c-jM-ajx">
+            <objects>
+                <viewController id="AwY-Rz-dq0" customClass="cellViewController" customModule="SAKUBUN" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9dv-Dp-eWT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="jIK-wy-0oh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g45-X9-GO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1811" y="615"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
