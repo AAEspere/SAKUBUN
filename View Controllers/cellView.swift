@@ -8,7 +8,7 @@
 
 import UIKit
 
-class cellViewController: UIView{
+class cellView: UIView{
 
     //for strokes
     var lastStroke = CGPoint.zero
@@ -20,6 +20,16 @@ class cellViewController: UIView{
     var lineOpacity: CGFloat = 1.0
     var swiped = false
     
+    //for undo function
+    var lineStored: [UIBezierPath] = []
+    var strokes: [CGPoint] = []
+    
+    override func layoutSubviews() {
+        self.clipsToBounds = true
+        self.isMultipleTouchEnabled = false
+        lineColor = UIColor.black
+        lineWidth = 10.0
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
@@ -36,7 +46,14 @@ class cellViewController: UIView{
         linePath = UIBezierPath()
         linePath.move(to:lastStroke)
         linePath.addLine(to:currentStroke)
+        
+        //for stack
+        lineStored.append(linePath)
+        strokes.append(lastStroke)
+        
+        //setting current point
         lastStroke = currentStroke
+        drawShapeLayer()
     }
     
     func drawShapeLayer() {
@@ -47,6 +64,15 @@ class cellViewController: UIView{
         shapeLayer.fillColor = UIColor.clear.cgColor
         self.layer.addSublayer(shapeLayer)
         self.setNeedsDisplay()
+    }
+    
+    func undoLine() {
+        lineStored.removeLast()
+        lastStroke = strokes.removeLast()
+    }
+    
+    func clearAll() {
+        
     }
 
 }
