@@ -10,22 +10,19 @@ import UIKit
 
 class cellView: UIView{
 
-
     //for strokes
     var lastStroke = CGPoint.zero
     var currentStroke = CGPoint.zero
     var linePath:UIBezierPath!
-    
     var lineColor = UIColor.black
     var lineWidth: CGFloat = 10.0
     var lineOpacity: CGFloat = 1.0
     var swiped = false
     
     //for undo function
-    var shapeLayersStored: [CAShapeLayer] = []
-    var shapeLayerCount = 0
-    var lineStored: [UIBezierPath] = []
-    var strokes: [CGPoint] = []
+    var linesStored: [CAShapeLayer] = []
+    var linesHolder: [[CAShapeLayer]] = []
+    var lineCount = 0
     
     override func layoutSubviews() {
         self.clipsToBounds = true
@@ -38,6 +35,7 @@ class cellView: UIView{
         guard let touch = touches.first else {
             return
         }
+        swiped = false
         lastStroke = touch.location(in: self)
     }
     
@@ -54,44 +52,53 @@ class cellView: UIView{
         drawShapeLayer()
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        linesHolder.append(linesStored)
+        linesStored = []
+        lineCount += 1
+    }
+    
     func drawShapeLayer() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = linePath.cgPath
         shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayersStored.append(shapeLayer)
-        self.layer.addSublayer(shapeLayersStored[shapeLayerCount])
-        
-        shapeLayerCount += 1
-        
+        linesStored.append(shapeLayer)
+        self.layer.addSublayer(linesStored[linesStored.count-1])
         self.setNeedsDisplay()
     }
-    
-    /*
-    func removeShapeLayer() {
-        self.layer.removeFromSuperlayer()
-        self.setNeedsDisplay()
-    }
- */
     
     @IBAction func undoButton(_ sender: Any) {
         undoLine()
     }
     
-    
     func undoLine() {
-        if(shapeLayerCount == 0) {
+        if(lineCount == 0) {
             return;
         }
-        else { shapeLayersStored[shapeLayerCount-1].removeFromSuperlayer()
-            shapeLayerCount -= 1
-            shapeLayersStored.removeLast()
+        else {
+            for i in linesHolder[lineCount-1] {
+                i.removeFromSuperlayer()
+            }
+            lineCount -= 1
+            linesHolder.removeLast()
         }
     }
     
+    @IBAction func clearButton(_ sender: Any) {
+        clearAll()
+    }
+    
     func clearAll() {
-        
+        for shapeLayerArrays in linesHolder{
+            for i in shapeLayerArrays {
+                i.removeFromSuperlayer()
+            }
+        }
+        linesStored = []
+        linesHolder = []
+        lineCount = 0
     }
 
 }
