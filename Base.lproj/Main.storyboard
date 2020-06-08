@@ -152,27 +152,26 @@
         <scene sceneID="ay1-2r-LX5">
             <objects>
                 <viewController id="HM3-DB-9wn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mkn-Sv-3n1" customClass="cellView" customModule="SAKUBUN" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="NX3-ca-N7Q" customClass="cellView" customModule="SAKUBUN" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xIA-W2-p3c" customClass="cellView" customModule="SAKUBUN" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="788"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gl9-yH-FJL">
+                                <rect key="frame" x="353" y="44" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Draw Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syP-hD-pk2">
-                                        <rect key="frame" x="41" y="52" width="81" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                                <state key="normal" title="Undo"/>
+                                <connections>
+                                    <action selector="undoButton:" destination="NX3-ca-N7Q" eventType="touchUpInside" id="5Wf-Ya-SRh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkK-el-hzo">
+                                <rect key="frame" x="25" y="44" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="n20-UW-13V"/>
+                        <viewLayoutGuide key="safeArea" id="AbD-7c-CR0"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VP6-1S-g76" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -181,6 +180,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iP8-4Y-VZx"/>
+        <segue reference="gFb-7M-sM9"/>
     </inferredMetricsTieBreakers>
 </document>

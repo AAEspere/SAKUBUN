@@ -10,6 +10,7 @@ import UIKit
 
 class cellView: UIView{
 
+
     //for strokes
     var lastStroke = CGPoint.zero
     var currentStroke = CGPoint.zero
@@ -21,6 +22,8 @@ class cellView: UIView{
     var swiped = false
     
     //for undo function
+    var shapeLayersStored: [CAShapeLayer] = []
+    var shapeLayerCount = 0
     var lineStored: [UIBezierPath] = []
     var strokes: [CGPoint] = []
     
@@ -46,11 +49,6 @@ class cellView: UIView{
         linePath = UIBezierPath()
         linePath.move(to:lastStroke)
         linePath.addLine(to:currentStroke)
-        
-        //for stack
-        lineStored.append(linePath)
-        strokes.append(lastStroke)
-        
         //setting current point
         lastStroke = currentStroke
         drawShapeLayer()
@@ -62,13 +60,34 @@ class cellView: UIView{
         shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.fillColor = UIColor.clear.cgColor
-        self.layer.addSublayer(shapeLayer)
+        shapeLayersStored.append(shapeLayer)
+        self.layer.addSublayer(shapeLayersStored[shapeLayerCount])
+        
+        shapeLayerCount += 1
+        
         self.setNeedsDisplay()
     }
     
+    /*
+    func removeShapeLayer() {
+        self.layer.removeFromSuperlayer()
+        self.setNeedsDisplay()
+    }
+ */
+    
+    @IBAction func undoButton(_ sender: Any) {
+        undoLine()
+    }
+    
+    
     func undoLine() {
-        lineStored.removeLast()
-        lastStroke = strokes.removeLast()
+        if(shapeLayerCount == 0) {
+            return;
+        }
+        else { shapeLayersStored[shapeLayerCount-1].removeFromSuperlayer()
+            shapeLayerCount -= 1
+            shapeLayersStored.removeLast()
+        }
     }
     
     func clearAll() {
